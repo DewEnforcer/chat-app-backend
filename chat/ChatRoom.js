@@ -13,7 +13,7 @@ class ChatRoom {
 
     addUser(user) {
         this.users.push(user);
-        user.emit("chatData", this.messages);
+        user.emit("chatData", {msgs: this.messages, chatName: this.name});
 
         const discMsg = this.createSystemMessage(1, user.user.username);
         this.users.forEach(u => u.emit("msg", discMsg));
