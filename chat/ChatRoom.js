@@ -46,6 +46,7 @@ class ChatRoom {
     }
     createSystemMessage(statusId, text) {
         return {
+            id: Date.now(),
             statusId,
             author: "system",
             text
