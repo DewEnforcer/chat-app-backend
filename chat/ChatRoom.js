@@ -17,6 +17,14 @@ class ChatRoom {
 
         const discMsg = this.createSystemMessage(1, user.user.username);
         this.users.forEach(u => u.emit("msg", discMsg));
+
+        this.sendUsersPresent(); //terrible for optimalization, must be reworked if used publicly
+    }
+    sendUsersPresent() {
+        const data = [];
+        this.users.map(u => data.push(u.user));
+
+        this.users.map(u => u.emit("chatUsers", data));
     }
     disconnectUser(user) {
         this.users = this.users.filter(u => u.user.id !== user.id);
@@ -24,6 +32,8 @@ class ChatRoom {
 
         const discMsg = this.createSystemMessage(2, user.username);
         this.users.forEach(u => u.emit("msg", discMsg));
+
+        this.sendUsersPresent(); //terrible for optimalization, must be reworked if used publicly
     }
 
     createMessage(text, author) {
