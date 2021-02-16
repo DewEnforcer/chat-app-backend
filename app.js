@@ -10,8 +10,10 @@ app.use(express.json());
 
 app.use("/chat", chat);
 
-app.listen(4000, () => {
-    console.log("Listening on port 4000!");
+const apiPort = process.env.PORT || 4000;
+
+app.listen(apiPort, () => {
+    console.log("Listening on port", apiPort);
 })
 
 
